@@ -72,3 +72,13 @@ The configurable bet ramp is a user-selected stake schedule for Hi-Lo, assuming 
 There is no backend, database, account, cookie-based session, localStorage, sessionStorage, import/export, session history, or analytics. The active shoe and temporary undo stack live only in React memory. Refreshing clears both shoe state and preferences. SEO assets and the static Next.js build do not persist play data.
 
 Workers are debounced by 160 ms, cancelled on state changes and terminated on unmount. Counting and basic strategy run synchronously without network requests. Undo/redo applies whole commands, including atomic bulk entries and combined hand/counter registration.
+
+## Playable practice table
+
+The default workspace deals physical cards from a Fisher–Yates shoe. Each shuffle index uses browser cryptographic random values with rejection sampling to avoid modulo bias. The reducer receives the shuffled deck as input; it performs no random draws itself. Practice starts with 1,000 virtual credits and is independent of the manually tracked shoe.
+
+Player cards and dealer upcards are removed from the unseen population immediately. The US hole card remains unseen until reveal, including after a negative peek; no-hole-card games draw the dealer's second card after player actions. Every reveal removes exactly one card. A round always reveals the dealer's second card; the dealer draws further only when there is a non-busted, non-surrendered, non-natural player hand to contest.
+
+Unsplit naturals pay 3:2; split 21 pays 1:1. Insurance costs half the original stake and pays 2:1. Splits and doubles require available credits. Split aces get one additional card and can only stand or resplit where permitted. Early surrender is offered before the blackjack check; late surrender requires blackjack to be excluded. ENHC loses all wagers against dealer blackjack. OBO retains one original wager exposure across the split tree and returns additional split/double stakes, including on busts.
+
+Round settlement updates the wallet automatically. The cut card and a minimum of 20 undealt cards trigger a fresh shoe before the next round. In the exceptional case of exhaustion during a round, all stakes are returned and the next round requires a fresh shoe. Rules, reshuffling and wallet resets are locked during an active round. Refresh clears all game and manual state. No history, persistence or real-money transactions are provided.

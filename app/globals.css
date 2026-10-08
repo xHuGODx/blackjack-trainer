@@ -326,3 +326,94 @@ legend > span { font-size:10px; color:var(--gold); }
   .rank-inventory > div > span { font-size:12px; }
   .inventory-bar { height:32px; margin:8px 0; }
 }
+/* Playable practice table */
+.practice-stats { display:grid; grid-template-columns:repeat(4,1fr) 1.4fr; margin:22px 0; border:1px solid var(--border); border-radius:12px; background:var(--panel); padding:20px 8px; }
+.practice-stats > div { padding:0 20px; border-right:1px solid var(--border); min-width:0; }
+.practice-stats > div:last-child { border:0; }
+.practice-stats strong { display:block; font-size:29px; font-weight:500; margin:8px 0; }
+.practice-stats small { display:block; font-size:9px; color:var(--muted); }
+.practice-count strong { color:var(--green); }
+.practice-wallet small button { margin-left:8px; color:var(--green); text-decoration:underline; }
+.play-grid { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(290px,1fr); gap:22px; align-items:start; }
+.game-table-panel { overflow:hidden; border:1px solid #355644; border-radius:13px; background:#14281e; box-shadow:0 16px 35px #0002; }
+.table-topline { display:flex; align-items:center; justify-content:space-between; padding:17px 21px; background:#15231c; border-bottom:1px solid #304333; }
+.table-topline .check { font-size:11px; }
+.felt-table { padding:26px 24px 22px; background:radial-gradient(ellipse at center,#214a35 0%,#173a2a 55%,#11291e 100%); }
+.table-zone-label { display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:13px; }
+.table-zone-label > span { display:flex; align-items:center; gap:8px; color:#9bbcaa; font-size:10px; letter-spacing:1.7px; }
+.table-zone-label > strong { background:#0c2419a8; padding:5px 10px; border-radius:5px; font-size:15px; font-weight:500; }
+.table-zone-label small { font-size:10px; color:#a6c5b2; }
+.table-card-row { display:flex; justify-content:center; flex-wrap:wrap; gap:7px; }
+.table-card { flex:none; width:70px; height:100px; border-radius:7px; position:relative; background:#f5f2e8; color:#17342a; border:1px solid #fff8; box-shadow:0 6px 12px #0004; user-select:none; }
+.red-suit { color:#b73d47; }
+.card-corner { position:absolute; left:7px; top:5px; font-size:16px; font-weight:700; line-height:1.1; }
+.card-corner small { display:block; font-size:13px; text-align:center; }
+.corner-bottom { left:auto; top:auto; right:7px; bottom:5px; transform:rotate(180deg); }
+.card-center { position:absolute; inset:0; display:grid; place-items:center; font-size:34px; }
+.card-back { display:grid; place-items:center; color:#96b9a4; border:3px solid #e8ebe1; background:repeating-linear-gradient(45deg,#18392b 0px,#18392b 3px,#29583f 3px,#29583f 5px); }
+.card-back > span { display:grid; place-items:center; height:44px; width:36px; font-size:28px; background:#183c2c; border:1px solid #739881; border-radius:4px; }
+.placeholder-card { background:#16392977; border:1px dashed #618470; border-color:#618470; box-shadow:none; opacity:.45; }
+.placeholder-card > span { background:transparent; border:0; }
+.enhc-placeholder { width:95px; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:7px; color:#aac3b1; font-size:10px; }
+.enhc-placeholder small { font-size:8px; }
+.felt-brand { text-align:center; margin:25px 0; color:#719780; font-size:13px; letter-spacing:4px; }
+.felt-brand > span { font-size:23px; margin-right:6px; }
+.felt-brand small { display:block; font-size:8px; letter-spacing:2px; margin-top:6px; }
+.player-zones { display:grid; grid-template-columns:1fr; gap:14px; }
+.split-zones { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.player-zone { border:1px solid transparent; padding:15px 9px 11px; border-radius:10px; min-width:0; }
+.active-hand { border-color:#8de4ad77; background:#3f895221; box-shadow:0 0 25px #70e59809; }
+.split-zones .table-card { width:55px; height:79px; }
+.split-zones .card-center { font-size:26px; }
+.split-zones .card-corner { font-size:13px; }
+.split-zones .card-corner small { font-size:10px; }
+.hand-stake { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:7px; margin-top:15px; font-size:10px; color:#b7cdbb; }
+.mini-chip { width:17px; height:17px; border:3px dashed #d7ae5c; border-radius:50%; background:#675530; }
+.hand-outcome { flex-basis:100%; text-align:center; margin-top:5px; font-size:12px; }
+.waiting-hand p { font-size:10px; text-align:center; color:#9cbaa5; margin-top:15px; }
+.game-message { padding:14px 20px; border-top:1px solid #36513e; display:flex; align-items:center; gap:10px; color:#bed0c4; font-size:11px; background:#182d21; min-height:49px; flex-wrap:wrap; }
+.game-message .live-dot { flex:none; }
+.winning-message { color:#a8eebd; background:#22432c; }
+.insurance-stake { margin-left:auto; font-size:9px; color:#e1bf79; }
+.game-controls { padding:19px 20px; background:#17221c; border-top:1px solid #304334; }
+.bet-controls { display:flex; align-items:end; gap:13px; flex-wrap:wrap; }
+.bet-controls > label { width:83px; flex:none; font-size:8px; color:#91ac98; letter-spacing:1px; }
+.bet-controls input { width:100%; margin-top:7px; font-size:16px; padding:9px; background:#0f1b14; }
+.bet-chips { display:flex; gap:6px; padding-bottom:2px; }
+.bet-chips button { border:1px solid #506046; border-radius:50%; width:33px; height:33px; color:#c4cdb7; background:#283321; font-size:10px; }
+.bet-chips button.selected { color:#f3d88a; border-color:#d7b86d; background:#51472b; }
+.deal-button { margin-left:auto; min-height:42px; }
+.deal-footnote { display:flex; justify-content:space-between; gap:12px; margin-top:13px; color:#718d7c; font-size:8px; }
+.prepeek-controls { display:flex; flex-wrap:wrap; gap:9px; }
+.prepeek-controls .button { flex:1; white-space:normal; font-size:11px; }
+.insurance-button { background:#423a24; border:1px solid #6f633b; color:#e9cf92; }
+.surrender-button { border:1px solid #826950; color:#dfc1a0; }
+.play-actions { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+.play-action { position:relative; display:flex; justify-content:center; align-items:center; flex-direction:column; gap:7px; min-height:78px; border:1px solid #425544; border-radius:7px; background:#233429; color:#dbe7de; font-size:13px; }
+.play-action kbd { font-size:9px; color:#8da794; }
+.play-action small { font-size:6px; letter-spacing:.6px; color:#a9edbd; }
+.recommended-action { background:#28563a; border-color:#82d3a0; box-shadow:0 0 12px #62c08a16; }
+.play-action:disabled { opacity:.33; }
+.play-coach { padding:22px; }
+.coach-intro { margin:16px 0; font-size:11px; line-height:1.8; color:#8ba293; }
+.coach-count-system { border-top:1px solid var(--border); padding-top:17px; margin-top:18px; }
+.coach-count-system label { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:10px; color:#9cb2a2; }
+.coach-count-system select { min-width:100px; max-width:150px; font-size:10px; padding:8px; }
+.coach-count-system p { margin-top:10px; line-height:1.7; }
+.last-exposure { margin-top:20px; }
+.last-exposure > div { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+.last-exposure > div > span { padding:8px; min-width:33px; text-align:center; font-size:14px; background:#243329; border:1px solid #3c5041; border-radius:5px; }
+.last-exposure small { display:block; font-size:8px; margin-top:5px; color:#8eae98; }
+.next-bet-hint { border-top:1px solid var(--border); padding-top:17px; margin-top:19px; }
+.next-bet-hint strong { display:block; font-size:12px; font-weight:500; margin-top:10px; }
+.next-bet-hint p { font-size:9px; color:var(--muted); margin-top:8px; }
+.next-bet-hint button { display:flex; gap:8px; align-items:center; font-size:10px; margin-top:12px; color:var(--green); }
+.practice-inventory { margin-top:22px; padding:22px; }
+.practice-inventory h2 { font-size:14px; }
+.practice-inventory .panel-heading p { margin-top:8px; }
+.rules-locked-note { color:#d6bb80; font-size:11px; margin:0 26px 20px; }
+.game-shortcuts { display:flex; flex-direction:column; gap:12px; font-size:10px; color:#a4baab; margin:0 26px 25px; }
+.play-workspace .settings-content fieldset:disabled { opacity:.5; }
+@media(max-width:1200px) { .play-grid { grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr); gap:16px; } .practice-stats > div { padding:0 12px; } .practice-stats strong { font-size:24px; } .practice-stats .metric-label { font-size:8px; } .game-controls { padding:15px; } .deal-button { width:100%; margin:0; justify-content:center; } .bet-controls { justify-content:space-between; } }
+@media(max-width:900px) { .play-grid { grid-template-columns:1fr; } .play-coach { display:grid; grid-template-columns:1fr 1fr; gap:0 24px; } .play-coach > .panel-heading,.play-coach > .coach-intro { grid-column:1/-1; } .practice-stats { grid-template-columns:repeat(5,minmax(0,1fr)); } .practice-stats small { font-size:8px; } .practice-stats > div { padding:0 10px; } .deal-button { width:auto; margin-left:auto; } }
+@media(max-width:620px) { .play-workspace .page-heading h1 { font-size:24px; } .practice-stats { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px 0; padding:15px 0; } .practice-stats > div:nth-child(3) { border:0; } .practice-stats > div:nth-child(4) { grid-column:1/2; } .practice-stats > .practice-wallet { grid-column:2/4; } .practice-stats strong { font-size:25px; margin:6px 0; } .play-coach { display:block; padding:19px; } .felt-table { padding:20px 12px 15px; } .table-topline { padding:13px; } .table-card { width:62px; height:90px; } .felt-brand { margin:20px 0; font-size:11px; } .player-zone { padding:12px 5px 8px; } .split-zones { gap:5px; } .split-zones .table-card { width:43px; height:64px; } .split-zones .card-center { font-size:20px; } .split-zones .card-corner { font-size:10px; left:4px; } .split-zones .corner-bottom { left:auto; right:4px; } .split-zones .card-corner small { font-size:8px; } .table-card-row { gap:4px; } .table-zone-label { gap:8px; } .table-zone-label > span { font-size:8px; letter-spacing:1px; } .table-zone-label > strong { font-size:13px; } .game-message { padding:13px; font-size:10px; } .play-actions { grid-template-columns:repeat(3,minmax(0,1fr)); } .play-action { min-height:63px; font-size:12px; } .play-action:nth-child(4),.play-action:nth-child(5) { min-height:49px; } .bet-controls { gap:10px; } .bet-chips { gap:5px; } .bet-chips button { width:30px; height:30px; } .deal-button { width:100%; margin:0; } .deal-footnote span:last-child { display:none; } .practice-inventory { padding:18px 14px; } .practice-inventory .panel-heading { align-items:start; gap:8px; } .practice-inventory .panel-heading p { font-size:9px; } .game-shortcuts { margin-left:18px; margin-right:18px; line-height:1.8; } }

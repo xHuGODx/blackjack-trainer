@@ -1,13 +1,13 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { count, cardTag, betUnits, tagsFor, insurance } from '@/lib/blackjack/counting';
 import { RANKS, evaluate, legalActions, parseCards, value, type Rank, type Rules, type HandContext } from '@/lib/blackjack/model';
-import { reducer, initialState, calculationShoe, physicalShoe, rankRange } from '@/lib/blackjack/state';
+import { type State, type Command, calculationShoe, physicalShoe, rankRange } from '@/lib/blackjack/state';
 import { basicStrategy, countDeviation, deviationsSupported } from '@/lib/blackjack/strategy';
 import type { EVResult } from '@/lib/blackjack/ev';
 import { Icon } from './icons';
-import { DEFAULT_PREFERENCES, TableSettings, type Preferences } from './table-settings';
+import { TableSettings, type Preferences } from './table-settings';
 import { StrategyChart } from './strategy-chart';
 const ACTION_NAMES = { hit: 'Hit', stand: 'Stand', double: 'Double down', split: 'Split', surrender: 'Surrender' };
 const ACTION_DETAIL = { hit: 'Take another card', stand: 'Keep your hand', double: 'Double your stake, take one card', split: 'Play the pair as two hands', surrender: 'Give up half your original stake' };
@@ -16,9 +16,7 @@ function ProgressRing({ percentage }: { percentage: number }) {
   const circumference = 2 * Math.PI * 20;
   return <svg className="progress-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" /><circle cx="24" cy="24" r="20" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - percentage / 100)} /></svg>;
 }
-export function LiveDashboard() {
-  const [state, dispatch] = useReducer(reducer, undefined, () => initialState());
-  const [prefs, setPrefs] = useState<Preferences>(DEFAULT_PREFERENCES);
+export function LiveDashboard({ state, dispatch, prefs, setPrefs, onPlay }: { state: State; dispatch: React.Dispatch<Command>; prefs: Preferences; setPrefs: (preferences: Preferences) => void; onPlay: () => void }) {
   const [target, setTarget] = useState<'counter' | 'player' | 'dealer'>('counter');
   const [entryMode, setEntryMode] = useState<'count' | 'already' | 'preview'>('count');
   const [tab, setTab] = useState<'live' | 'chart'>('live');
@@ -85,7 +83,7 @@ export function LiveDashboard() {
     };
     window.addEventListener('keydown', handle);
     return () => window.removeEventListener('keydown', handle);
-  }, [target, entryMode, grouped]);
+  }, [target, entryMode, grouped, dispatch]);
   const onRules = (next: Rules) => dispatch({ type: 'rules', rules: next });
   const setContext = (changes: Partial<HandContext>) => dispatch({ type: 'context', context: { ...live.context, ...changes } });
   const addCard = (rank: Rank) => {
@@ -113,7 +111,7 @@ export function LiveDashboard() {
     <aside className="sidebar">
       <Link className="brand" href="/" aria-label="Blackjack Trainer home"><span className="brand-mark">♠</span><span>blackjack<span className="brand-secondary">TRAINER</span></span></Link>
       <div className="nav-label">WORKSPACE</div>
-      <nav aria-label="Main navigation"><button className={tab === 'live' ? 'nav-button active' : 'nav-button'} onClick={() => setTab('live')}><Icon name="cards" />Live table<span className="live-dot" /></button><button className={tab === 'chart' ? 'nav-button active' : 'nav-button'} onClick={() => setTab('chart')}><Icon name="chart" />Strategy chart</button><button className="nav-button" onClick={() => dialog.current?.showModal()}><Icon name="settings" />Table rules</button></nav>
+      <nav aria-label="Main navigation"><button className="nav-button" onClick={onPlay}><Icon name="cards" />Play blackjack</button><button className={tab === 'live' ? 'nav-button active' : 'nav-button'} onClick={() => setTab('live')}><Icon name="cards" />Live table<span className="live-dot" /></button><button className={tab === 'chart' ? 'nav-button active' : 'nav-button'} onClick={() => setTab('chart')}><Icon name="chart" />Strategy chart</button><button className="nav-button" onClick={() => dialog.current?.showModal()}><Icon name="settings" />Table rules</button></nav>
       <div className="sidebar-bottom"><div className="privacy-note"><Icon name="shield" /><strong>Just you and the shoe.</strong><p>No accounts. No saved sessions.<br />Everything clears on refresh.</p></div><a className="creator" href="https://hugosantosribeiro.me" target="_blank" rel="noreferrer">Made by Hugo Santos Ribeiro <span>↗</span></a></div>
     </aside>
     <div className="workspace">

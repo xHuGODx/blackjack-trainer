@@ -1,6 +1,6 @@
 # Blackjack Trainer
 
-A free live blackjack counter and strategy assistant at `blackjack.hugosantosribeiro.me`. Built with Next.js App Router, React, TypeScript and Tailwind CSS. No backend, accounts or session persistence.
+A playable blackjack trainer with a live counter and strategy assistant at `blackjack.hugosantosribeiro.me`. Built with Next.js App Router, React, TypeScript and Tailwind CSS. No backend, accounts or session persistence.
 
 ## Run locally
 
@@ -14,6 +14,11 @@ npm run dev -- --port 3001
 Open `http://localhost:3001`. All active shoe state and settings disappear on refresh.
 
 ## Features
+
+- Play blackjack against an automatic dealer with 1,000 resettable virtual credits, bets, hit/stand, doubles, splits, surrender and insurance.
+- Automatic count and coaching for the active hand. Hidden dealer cards enter the count only when revealed.
+- Play mode and manual external-game tracking keep independent shoes in memory when switching between them.
+- Cryptographic Fisher–Yates shuffle, configurable soft-17, DAS, resplit aces, surrender and US peek/ENHC/OBO settlement.
 
 - Thirteen rank buttons, optional grouped tens, keyboard entry and transactional bulk entry (`A 5 10 K`, `2x4`).
 - Seven counting options: Hi-Lo, KO, Hi-Opt I/II, Omega II, Zen Count and custom tags. Switch systems without resetting the shoe.
@@ -39,7 +44,7 @@ npm run build
 npm run test:e2e
 ```
 
-The mathematical suite covers count systems, negative rounding, shoe conservation, advisor registration, undo/redo, reference strategy cells, rule legality, soft hands, surrender, split conditions, insurance and finite EV. The browser suite runs against the production build on desktop and mobile, including the EV worker, keyboard operation, responsive charts and the absence of persistent state.
+The mathematical suite covers game payouts, hidden-card conservation, insurance, split/double stakes, OBO refunds, credit limits, round transitions, count systems, negative rounding, shoe conservation, advisor registration, undo/redo, reference strategy cells, rule legality, soft hands, surrender, split conditions, insurance and finite EV. The browser suite runs against the production build on desktop and mobile, including the EV worker, keyboard operation, responsive charts and the absence of persistent state.
 
 Browser tests use an installed Google Chrome at `/usr/bin/google-chrome` when available. Otherwise install Playwright Chromium:
 

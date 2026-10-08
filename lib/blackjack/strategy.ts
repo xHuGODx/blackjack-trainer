@@ -3,10 +3,10 @@ import type { System, Rounding } from './counting';
 export type Advice = { action: Action; fallback?: Action; reason: string; conditional?: string };
 const between = (n: number, lo: number, hi: number) => n >= lo && n <= hi;
 // Total-dependent standard 3:2 strategy. Reference and scope: docs/mathematics.md.
-export function basicStrategy(cards: readonly Rank[], dealer: Rank, rules: Rules, context: HandContext = DEFAULT_CONTEXT): Advice | null {
+export function basicStrategy(cards: readonly Rank[], dealer: Rank, rules: Rules, context: HandContext = DEFAULT_CONTEXT, available?: readonly Action[]): Advice | null {
   if (context === DEFAULT_CONTEXT && rules.surrender === 'early') context = { ...context, peekCleared: false };
   context = { ...context, peekCleared: rules.holeCard === 'peek' ? context.peekCleared : dealer !== 'A' && value(dealer) !== 10 };
-  const legal = legalActions(cards, rules, context, dealer);
+  const legal = legalActions(cards, rules, context, dealer).filter(action => !available || available.includes(action));
   if (!legal.length) return null;
   const { total: t, soft, pair } = evaluate(cards);
   const d = dealer === 'A' ? 11 : value(dealer);

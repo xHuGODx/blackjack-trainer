@@ -3,6 +3,7 @@ test('rapid counting, integrated hand, EV worker, clear and reload', async ({ pa
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await expect(page.getByTestId('running-count')).toHaveText('0');
   await page.keyboard.press('2'); await page.keyboard.press('3'); await page.keyboard.press('4');
   await expect(page.getByTestId('cards-seen')).toHaveText('3');
@@ -23,12 +24,14 @@ test('rapid counting, integrated hand, EV worker, clear and reload', async ({ pa
   const persistence = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length }));
   expect(persistence).toEqual({ local: 0, session: 0 });
   await page.reload();
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await expect(page.getByTestId('cards-seen')).toHaveText('0');
   await expect(page.getByRole('button', { name: 'Undo last action' })).toBeDisabled();
   expect(errors).toEqual([]);
 });
 test('rule changes, dynamic chart and small-screen layout', async ({ page }, testInfo) => {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await page.getByRole('button', { name: 'Table rules', exact: true }).click();
   await page.getByLabel('Dealer soft 17').selectOption('hit');
   await page.getByLabel('Number of decks', { exact: true }).selectOption('2');
@@ -49,6 +52,7 @@ test('rule changes, dynamic chart and small-screen layout', async ({ page }, tes
 });
 test('already-counted and preview cards do not affect the live counter twice', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await page.locator('#bulk-cards').fill('A 10 6');
   await page.getByRole('button', { name: 'Add cards', exact: true }).click();
   await expect(page.getByTestId('cards-seen')).toHaveText('3');
@@ -72,6 +76,7 @@ test('already-counted and preview cards do not affect the live counter twice', a
 });
 test('dealer ace offers pre-peek insurance and main-hand wait state', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await page.keyboard.press('p'); await page.keyboard.press('0'); await page.keyboard.press('6');
   await page.keyboard.press('d'); await page.keyboard.press('a');
   await expect(page.locator('.recommendation h3')).toHaveText('Wait for dealer peek');
@@ -82,6 +87,7 @@ test('dealer ace offers pre-peek insurance and main-hand wait state', async ({ p
 });
 test('grouped tens, custom tag uncertainty and switching systems retain the shoe', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   await page.getByRole('checkbox', { name: 'Combine 10s', exact: true }).check();
   await page.keyboard.press('0'); await page.keyboard.press('t');
   await expect(page.getByTestId('cards-seen')).toHaveText('2');
@@ -101,6 +107,7 @@ test('grouped tens, custom tag uncertainty and switching systems retain the shoe
 });
 test('all narrow and tablet widths avoid horizontal overflow; large/compact modes work', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Live assistant', exact: true }).click();
   for (const width of [320, 393, 620, 768, 1000, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), `overflow at ${width}`).toBe(false);
